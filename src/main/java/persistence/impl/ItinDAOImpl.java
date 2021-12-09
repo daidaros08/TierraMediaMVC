@@ -1,0 +1,162 @@
+package persistence.impl;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.LinkedList;
+import java.util.List;
+
+import model.Itinerari;
+import persistence.ItinerariDAO;
+import persistence.commons.ConnectionProvider;
+import persistence.commons.MissingDataException;
+
+public class ItinDAOImpl implements ItinerariDAO {
+
+	public int insert(Itinerari itinerari) {
+		try {
+			String sql = "INSERT INTO ITINERARI (ID_ITINERARI, ID_USER, ID_ATTRACTION) VALUES (?,?,?)";
+			Connection conn = ConnectionProvider.getConnection();
+
+			PreparedStatement statement = conn.prepareStatement(sql);
+			statement.setInt(1, itinerari.getId_itinerari());
+			statement.setInt(2, itinerari.getId_user());
+			statement.setInt(3, itinerari.getId_attraction());
+
+			int rows = statement.executeUpdate();
+			return rows;
+		} catch (Exception e) {
+			throw new MissingDataException(e);
+		}
+	}
+
+	public int update(Itinerari itinerari) {
+		
+		try {
+			String sql = "UPDATE ITINERARI SET ID_USER=?, ID_ATTRACTION=? WHERE ID_ITINERARI = ?";
+			Connection conn = ConnectionProvider.getConnection();
+			PreparedStatement statement = conn.prepareStatement(sql);
+			statement.setInt(1, itinerari.getId_user());
+			statement.setInt(2, itinerari.getId_attraction());
+			statement.setInt(3, itinerari.getId_itinerari());
+			
+			int rows = statement.executeUpdate();
+
+			return rows;
+		} catch (Exception e) {
+			throw new MissingDataException(e);
+		}
+	}
+	
+
+	public int delete(Itinerari itinerari) {
+		//Diego-06-12 MODIFICACION Borra los usuarios por numero de ID
+		try {
+			String sql = "DELETE FROM ITINERARI WHERE ID = ?";
+			Connection conn = ConnectionProvider.getConnection();
+
+			PreparedStatement statement = conn.prepareStatement(sql);
+			statement.setInt(1, itinerari.getId_itinerari());
+			int rows = statement.executeUpdate();
+
+			return rows;
+		} catch (Exception e) {
+			throw new MissingDataException(e);
+		}
+	}
+
+	public Itinerari findByItinUser(Integer id) {
+		try {
+			String sql = "SELECT * FROM ITINERARI WHERE ID_USER = ?";
+			Connection conn = ConnectionProvider.getConnection();
+			PreparedStatement statement = conn.prepareStatement(sql);
+			statement.setInt(1, id);
+			ResultSet resultados = statement.executeQuery();
+
+			Itinerari itinerari = null;
+
+			if (resultados.next()) {
+				itinerari = toItinerari(resultados);
+			}
+
+			return itinerari;
+		} catch (Exception e) {
+			throw new MissingDataException(e);
+		}
+	}
+
+	public Itinerari find(Integer id) {
+		try {
+			String sql = "SELECT * FROM ITINERARI WHERE ID_USER = ?";
+			Connection conn = ConnectionProvider.getConnection();
+			PreparedStatement statement = conn.prepareStatement(sql);
+			statement.setInt(1, id);
+			ResultSet resultados = statement.executeQuery();
+
+			Itinerari itinerari = null;
+
+			if (resultados.next()) {
+				itinerari = toItinerari(resultados);
+			}
+
+			return itinerari;
+		} catch (Exception e) {
+			throw new MissingDataException(e);
+		}
+	}
+
+	/*public int countAll() {
+		try {
+			String sql = "SELECT COUNT(1) AS TOTAL FROM USERS";
+			Connection conn = ConnectionProvider.getConnection();
+			PreparedStatement statement = conn.prepareStatement(sql);
+			ResultSet resultados = statement.executeQuery();
+
+			resultados.next();
+			int total = resultados.getInt("TOTAL");
+
+			return total;
+		} catch (Exception e) {
+			throw new MissingDataException(e);
+		}
+	}*/
+
+	public List<Itinerari> findAll() {
+		try {
+			String sql = "SELECT * FROM ITINERARI";
+			Connection conn = ConnectionProvider.getConnection();
+			PreparedStatement statement = conn.prepareStatement(sql);
+			ResultSet resultados = statement.executeQuery();
+
+			List<Itinerari> itinerari = new LinkedList<Itinerari>();
+			while (resultados.next()) {
+				itinerari.add(toItinerari(resultados));
+			}
+
+			return itinerari;
+		} catch (Exception e) {
+			throw new MissingDataException(e);
+		}
+	}
+
+	private Itinerari toItinerari(ResultSet itinRegister) throws SQLException {
+		return new Itinerari(
+				itinRegister.getInt(1),
+				itinRegister.getInt(2), 
+				itinRegister.getInt(3));
+		
+	}
+
+
+
+	@Override
+	public int countAll() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+
+
+
+}
