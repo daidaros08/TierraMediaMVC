@@ -11,7 +11,6 @@
 	<jsp:include page="/partials/nav.jsp"></jsp:include>
 
 	<main class="container">
-
 		<c:if test="${flash != null}">
 			<div class="alert alert-danger">
 				<p>
@@ -34,10 +33,7 @@
 		<c:if test="${user.isAdmin()}">
 			
 	
-			
-			
-			
-			
+					
 		</c:if>
 		
 		<table class="table table-stripped table-hover">
@@ -46,8 +42,7 @@
 					<th>Itinerario</th>
 					<th>Usuario</th>
 					<th>Comprado</th>
-					
-					<th>Acciones</th>
+					<th>Preferencia</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -59,9 +54,10 @@
 						<td><c:out value="${itinerari.id_user}"></c:out></td>
 						
 						<td><c:out value="${itinerari.id_attraction}"></c:out></td>
-						<%-- 
+						
 						<td><c:out value="${user.prefer}"></c:out></td>
-						--%>
+						
+						<!-- 
 						<td>
 								<a href="/turismo/users/editusers.do?id=${user.id}"
 									class="btn btn-light rounded-0" role="button"><i
@@ -72,6 +68,7 @@
 									class="bi bi-x-circle-fill"></i></a>
 
 							</td>
+						 -->
 					</tr>
 					
 				</c:forEach>

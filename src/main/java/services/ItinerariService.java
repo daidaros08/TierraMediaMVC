@@ -97,10 +97,10 @@ public class ItinerariService {
 		userDAO.delete(user);
 	}
 
-	/*public Attraction find(Integer id) {
+	public Attraction findAttraction(Integer id) {
 		AttractionDAO attractionDAO = DAOFactory.getAttractionDAO();
 		return attractionDAO.find(id);
-	}*/
+	}
 
 
 
