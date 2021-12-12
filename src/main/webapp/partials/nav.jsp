@@ -1,8 +1,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
+<nav class="navbar navbar-expand-md navbar-dark bg-danger mb-4">
 	<div class="container">
-		<a class="navbar-brand" href="/turismo/index.jsp">Turismo en la Tierra Media</a>
+		<a class="navbar-brand" href="/turismo/index.jsp"><b>Turismo en la Tierra Media</b></a>
 		<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
 			data-bs-target="#navbarCollapse" aria-controls="navbarCollapse"
 			aria-expanded="false" aria-label="Toggle navigation">

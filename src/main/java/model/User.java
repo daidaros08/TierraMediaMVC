@@ -1,5 +1,9 @@
 package model;
 
+import java.util.List;
+import java.util.Collections;
+import java.util.LinkedList;
+
 import utils.Crypt;
 
 public class User {
@@ -126,6 +130,34 @@ public class User {
 	//Agrego SeterPreferencias
 	public void setPrefer(String prefer) {
 		this.prefer = prefer;
+	}
+	
+	//Ordena las atracciones segun dinero y tiempo
+	public static void sortAttractionsByCostAndDuration (List<Attraction> attractions) {
+		Collections.sort(attractions, new SortedAttractions());		
+	}
+	
+	//ordena las atracciones segun preferencias
+	public List<Attraction> sortAttractionsByPrefer(List<Attraction> attrac){
+		LinkedList<Attraction> suggest = new LinkedList<Attraction>();
+		LinkedList<Attraction> dontMatch = new LinkedList<Attraction>();
+		//ordena por Precio y Tiempo
+		User.sortAttractionsByCostAndDuration(attrac);
+
+				for (Attraction att : attrac) {
+					if (att.getTipe().equals(this.getPrefer())) {
+						suggest.add(att);
+					}
+					else {
+						dontMatch.add(att);
+					}
+				}
+
+				// AGREGA LOS PRODUCTOS QUE NO COINCIDEN AL FINAL DE LA LISTA
+				suggest.addAll(dontMatch);
+
+				return suggest;
+
 	}
 	
 	@Override

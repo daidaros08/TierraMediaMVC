@@ -32,8 +32,12 @@
 
 	<div class="mb-3">
 		<label for="prefer" class="col-form-label">Preferencias</label> 
-		<input type="text" class="form-control" id="prefer" name="prefer"
-		 required value="Ingresar disponibles Aventura-Degustacion-Paisaje"></input>
+		<select class="form-control" id="prefer" name="prefer"
+		 required>
+		 <option value="Aventura">Aventura</option>
+		 <option value="Paisaje">Paisaje</option>
+		 <option value="Degustacion">Degustacion</option>
+		 </select>
 	</div>
 
 

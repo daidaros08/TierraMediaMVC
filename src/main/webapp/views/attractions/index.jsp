@@ -53,6 +53,7 @@
 			<thead>
 				<tr>
 					<th>Atracci&oacute;n</th>
+					<th>Tipo</th>
 					<th>Costo</th>
 					<th>Duraci&oacute;n</th>
 					<th>Cupo</th>
@@ -66,6 +67,7 @@
 						<c:out value="${attraction.name}"></c:out></strong>
 						<br>
 						<c:out value="${attraction.description}"></c:out></td>
+						<td> <c:out value="${attraction.tipe }"></c:out> </td>
 						<td><c:out value="${attraction.cost}"></c:out></td>
 						<td><c:out value="${attraction.duration}"></c:out></td>
 						<td><c:out value="${attraction.capacity}"></c:out></td>

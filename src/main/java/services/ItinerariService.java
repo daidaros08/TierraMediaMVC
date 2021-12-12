@@ -1,5 +1,6 @@
 package services;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import model.Attraction;
@@ -11,49 +12,38 @@ import persistence.UserDAO;
 import persistence.commons.DAOFactory;
 
 public class ItinerariService {
-
-	public List<Itinerari> list() {
-		return DAOFactory.getItinerariDAO().findAll();
+	
+	public List<Itinerari> list(Integer Id) {
+	
+		//List <Itinerari> auxiliar = new ArrayList<Itinerari>();
+		
+		//auxiliar.add(DAOFactory.getItinerariDAO().findById(Id));
+		
+		//12-10 aca hay que cambiar para que tome solo el id del 
+		//usuario que compro
+		
+		//return DAOFactory.getItinerariDAO().findAll();
+		
+		return DAOFactory.getItinerariDAO().findById(Id);
+		
+		//return auxiliar;
 	}
 	
-	public Itinerari create(Integer id_itinerari, Integer id_usuario, Integer id_attraction) {
+	
+	public Itinerari create(Integer id_itinerari, Integer id_usuario, Integer id_attraction, String name, Integer cost, Double duration) {
 
-		Itinerari itinerari = new Itinerari(id_itinerari,id_usuario, id_attraction);
+		Itinerari itinerari = new Itinerari(id_itinerari,id_usuario, id_attraction, name, cost, duration);
 	
 		ItinerariDAO itinerariDAO = DAOFactory.getItinerariDAO();
+		
 		itinerariDAO.insert(itinerari);
-
+		
 	return itinerari;
 	
 
 	}
 	
-	//Este metodos hay que cambiarlo
-	public User update(Integer id, String username,
-			String password, 
-			boolean admin, Integer coins, double time,
-			String prefer) {
 
-		UserDAO userDAO = DAOFactory.getUserDAO();
-		User user = userDAO.find(id);
-
-		user.setUsername(username);
-		user.setPassword(password);
-		user.setAdmin(admin);
-		user.setCoins(coins);
-		user.setTime(time);
-		user.setPrefer(prefer);
-		
-		userDAO.update(user);
-		/*
-		if (user.isValid()) {
-			userDAO.update(user);
-			// XXX: si no devuelve "1", es que hubo más errores
-		}*/
-
-		return user;
-	}
-	
 	
 	
 	public Itinerari find(Integer id) {
@@ -97,10 +87,10 @@ public class ItinerariService {
 		userDAO.delete(user);
 	}
 
-	public Attraction findAttraction(Integer id) {
+	/*public Attraction find(Integer id) {
 		AttractionDAO attractionDAO = DAOFactory.getAttractionDAO();
 		return attractionDAO.find(id);
-	}
+	}*/
 
 
 
